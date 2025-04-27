@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Détails Employé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+  
+    body {
+      background-color: #f4f9ff;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+  
+    .profile-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.1);
+      padding: 40px;
+      margin-top: 40px;
+      max-width: 1000px; 
+      width: 100%;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  
+    .profile-left {
+      flex: 1 1 250px;
+      text-align: center;
+    }
+  
+    .profile-left img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #e3f2fd;
+      margin-bottom: 20px;
+    }
+  
+    .profile-left h2 {
+      color: #0d47a1;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+  
+    .profile-left p {
+      color: #1565c0;
+      font-weight: 500;
+    }
+  
+    .profile-right {
+      flex: 2 1 400px;
+    }
+  
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0d47a1;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e3f2fd;
+      padding-bottom: 5px;
+    }
+  
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+  
+    .info-label {
+      color: #333;
+      font-weight: 600;
+    }
+  
+    .info-value {
+      color: #555;
+    }
+  
+    .actions {
+      flex: 0 0 150px; 
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+  
+    .btn {
+      padding: 10px 20px;
+      background-color: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%; 
+    }
+  
+    .btn:hover {
+      background-color: #1565c0;
+    }
+  </style>
+  
+
+ 
+</head>
+<body>
+  <div class="profile-card" style="max-width: 1000px;"> 
+    <div class="profile-left">
+      <img id="photo-employe" src="blank-profile-picture-973460_960_720.webp" alt="Photo Employé">
+      <h2 id="nom-employe">Ahmed Bensalah</h2>
+      <p id="fonction-employe">Inspecteur — Chef de Service</p>
+    </div>
+  
+    <div class="profile-right">
+      <div class="section-title">Informations Personnelles</div>
+      <div class="info-row">
+        <span class="info-label">Date de Naissance :</span>
+        <span class="info-value" id="date-naissance">12/04/1985</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Lieu de Naissance :</span>
+        <span class="info-value" id="lieu-naissance">Guelma</span>
+      </div>
+  
+      <div class="section-title" style="margin-top: 30px;">Informations Professionnelles</div>
+      <div class="info-row">
+        <span class="info-label">Date de Recrutement :</span>
+        <span class="info-value" id="date-recrutement">15/06/2010</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Date de Nomination :</span>
+        <span class="info-value" id="date-nomination">20/09/2012</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Date des Délibérations :</span>
+        <span class="info-value" id="date-deliberation">05/08/2012</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Grade :</span>
+        <span class="info-value" id="grade-employe">Inspecteur</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Fonction :</span>
+        <span class="info-value" id="fonction-poste">Chef de Service</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Indice de Référence :</span>
+        <span class="info-value" id="indice-reference">585</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Observations :</span>
+        <span class="info-value" id="observations-employe">-</span>
+      </div>
+    </div>
+  
+    <div class="actions" style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
+      <button class="btn" onclick="history.back()">⬅ Retour</button>
+      
+    </div>
+  </div>
+  
+    </div>
+  </div>
+  <script>
+   
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const employeeId = urlParams.get('employeeId');
+    
+        if (employeeId) {
+          
+          fetch(`http://localhost:3000/getEmployeeData?employeeId=${employeeId}`)
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                document.getElementById('nom-employe').textContent = data.nom;
+                document.getElementById('fonction-employe').textContent = data.fonction;
+                document.getElementById('date-naissance').textContent = data.date_naissance;
+                document.getElementById('lieu-naissance').textContent = data.lieu_naissance;
+                document.getElementById('date-recrutement').textContent = data.date_recrutement;
+                document.getElementById('date-nomination').textContent = data.date_nomination;
+                document.getElementById('date-deliberation').textContent = data.date_deliberation;
+                document.getElementById('grade-employe').textContent = data.grade;
+                document.getElementById('fonction-poste').textContent = data.fonction_poste;
+                document.getElementById('indice-reference').textContent = data.indice_reference;
+                document.getElementById('observations-employe').textContent = data.observations;
+                document.getElementById('photo-employe').src = data.photo;
+              } else {
+                alert('Aucun employé trouvé.');
+              }
+           window })
+            .catch(error => console.error('Erreur:', error));
+        } else {
+          alert("Aucun identifiant d'employé trouvé dans l'URL.");
+        }
+      };
+      </script>
+      
+ 
+</body>
+</html>

@@ -251,7 +251,7 @@
     <div class="container">
       <h1>Employés Actuels</h1>
       <div class="actions">
-        <button class="btn" onclick="ajouterEmploye()">➕ Nouveau Employé</button>
+        <button class="btn" onclick="window.location.href='ajouter-employe.html'">➕ Nouveau Employé</button>
       </div>
       <table>
         <thead>
@@ -279,7 +279,8 @@
               
               <button class="btn btn-small" onclick="editEmploye(this)">Éditer</button>
               <button class="btn btn-small" onclick="archiverEmploye(this)">Archiver</button>
-              <button class="btn btn-small" onclick="profile(this)">Profile</button>
+              <button class="btn" onclick="window.location.href='profile.html?employeeId=123'">Profil</button>
+
             </td>
           </tr>
         </tbody>

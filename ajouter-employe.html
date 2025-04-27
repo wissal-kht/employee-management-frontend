@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ajouter un Employé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f4f9ff;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.1);
+      width: 100%;
+      max-width: 900px;  /* عرض أكبر للنموذج */
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0d47a1;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);  /* عمودين متساويين */
+      gap: 20px;  /* المسافة بين الحقول */
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #226bd7;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .btn:hover {
+      background-color: #1565c0;
+    }
+
+    
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Ajouter un Employé</h1>
+    <form id="addEmployeeForm">
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="nom">Nom & Prénom</label>
+          <input type="text" id="nom" placeholder="Entrez le nom et prénom" required>
+        </div>
+
+        <div class="input-group">
+          <label for="date-naissance">Date de Naissance</label>
+          <input type="date" id="date-naissance" required>
+        </div>
+
+        <div class="input-group">
+          <label for="lieu-naissance">Lieu de Naissance</label>
+          <input type="text" id="lieu-naissance" placeholder="Entrez le lieu de naissance" required>
+        </div>
+
+        <div class="input-group">
+          <label for="date-recrutement">Date de Recrutement</label>
+          <input type="date" id="date-recrutement" required>
+        </div>
+
+        <div class="input-group">
+          <label for="date-Délibérations">Date de Délibérations</label>
+          <input type="date" id="date-Délibérations" required>
+        </div>
+
+        <div class="input-group">
+          <label for="Date-Nomination">Date de Nomination</label>
+          <input type="date" id="date-Nomination" required>
+        </div>
+
+        <div class="input-group">
+          <label for="grade">Grade</label>
+          <input type="text" id="grade" placeholder="Entrez le grade" required>
+        </div>
+
+        <div class="input-group">
+          <label for="fonction">Fonction</label>
+          <input type="text" id="fonction" placeholder="Entrez la fonction" required>
+        </div>
+
+        <div class="input-group">
+          <label for="Indice">Indice de Référence</label>
+          <input type="text" id="Indice" placeholder="Entrez le Indice de Référence" required>
+        </div>
+
+        <div class="input-group">
+          <label for="Observations">Observations</label>
+          <input type="text" id="Observations" placeholder="Entrez le Observations" required>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Ajouter</button>
+        <button type="reset" class="btn" style="background-color: #ccc;">Annuler</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // توليد ID فريد
+    function generateUniqueId() {
+      return 'emp-' + Math.random().toString(36).substr(2, 9);  
+    }
+
+    
+    function submitForm() {
+      
+      const employeeData = {
+        id: generateUniqueId(),
+        nom: document.getElementById('nom').value,
+        date_naissance: document.getElementById('date-naissance').value,
+        lieu_naissance: document.getElementById('lieu-naissance').value,
+        date_recrutement: document.getElementById('date-recrutement').value,
+        grade: document.getElementById('grade').value,
+        fonction: document.getElementById('fonction').value,
+        date_de_deliberations: document.getElementById('date-Délibérations').value,
+        date_de_nomination: document.getElementById('Date-Nomination').value,
+        indice: document.getElementById('Indice').value,
+        observations: document.getElementById('Observations').value
+      };
+
+    
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/path-to-your-server-endpoint', true);  
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onload = function() {
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+              alert('Employé ajouté avec succès!');
+              document.getElementById('addEmployeeForm').reset();
+          } else {
+              alert('Erreur lors de l\'ajout de l\'employé');
+          }
+      };
+      
+      };
+      xhr.send(JSON.stringify(employeeData));  
+    }
+    document.getElementById('addEmployeeForm').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+      submitForm();
+    });
+  </script>
+
+</body>
+</html>
+
