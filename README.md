@@ -64,11 +64,7 @@ The focus was on:
 - Presenting employee-related information in a structured way
 - Creating a consistent visual design across the application
 
----
 
-## 📷 Screenshots
-
-Screenshots of the main interfaces can be added here.
 
 ---
 
